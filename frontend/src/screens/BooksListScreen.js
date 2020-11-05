@@ -1,64 +1,60 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Row, Col, Container, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { getUsers, deleteUser } from '../actions/userActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import { listBooks } from '../actions/bookActions';
+import { LinkContainer } from 'react-router-bootstrap';
+import { deleteBook } from '../actions/bookActions';
 
-const UsersListScreen = ({ history }) => {
+const BooksListScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const usersList = useSelector((state) => state.usersList);
-  const { Loading, users, error } = usersList;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const userDelete = useSelector((state) => state.userDelete);
-  const { Loading: LoadingDelete, successDelete, errorDelete } = userDelete;
+  const listBook = useSelector((state) => state.listBooks);
+  const { Loading, error, books } = listBook;
+  const bookDelete = useSelector((state) => state.bookDelete);
+  const { Loading: LoadingDelete, successDelete, errorDelete } = bookDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(getUsers());
+      dispatch(listBooks());
     } else {
       history.push('/login');
     }
   }, [dispatch, history, successDelete, userInfo]);
-  const deleteUserHandler = (id) => {
+  const deleteBookHandler = (id) => {
     if (window.confirm('are you sure')) {
-      dispatch(deleteUser(id));
+      dispatch(deleteBook(id));
     }
   };
   return (
     <>
-      <h2 className='my-2'>Users</h2>
+      <h2 className='my-2'>Books</h2>
       {Loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Table striped bordered hover className='sm' responsive>
+        <Table striped bordered hover className='md' responsive>
           <thead>
             <tr>
               <th>ID</th>
-              <th> Name</th>
-              <th>EMAIL</th>
-              <th>ADMIN</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Author</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
+            {books.map((book) => (
+              <tr key={book._id}>
+                <td>{book._id}</td>
+                <td>{book.title}</td>
+                <td>{book.price}€</td>
+                <td>{book.author}</td>
                 <td>
-                  {user.isAdmin ? (
-                    <i className='fas fa-check' style={{ color: 'green' }}></i>
-                  ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
-                  )}
-                </td>
-                <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/book/${book._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
                     </Button>
@@ -66,7 +62,7 @@ const UsersListScreen = ({ history }) => {
                   <Button
                     variant='danger'
                     className='btn-sm'
-                    onClick={() => deleteUserHandler(user._id)}
+                    onClick={() => deleteBookHandler(book._id)}
                     style={{ marginLeft: '5px' }}
                   >
                     <i className='fas fa-trash'></i>
@@ -81,4 +77,4 @@ const UsersListScreen = ({ history }) => {
   );
 };
 
-export default UsersListScreen;
+export default BooksListScreen;

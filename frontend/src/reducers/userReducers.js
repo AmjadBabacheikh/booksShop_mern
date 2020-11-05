@@ -21,6 +21,13 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  USER_INFO_REQUEST,
+  USER_INFO_SUCCESS,
+  USER_INFO_FAIL,
+  USER_EDIT_REQUEST,
+  USER_EDIT_SUCCESS,
+  USER_EDIT_FAIL,
+  USER_EDIT_RESET,
 } from '../constants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -145,6 +152,46 @@ export const userDeleteReducer = (state = {}, action) => {
       return { Loading: false, successDelete: true };
     case USER_DELETE_FAIL:
       return { Loading: false, errorDelete: payload };
+    default:
+      return state;
+  }
+};
+
+export const userInformationsReducer = (state = { user: {} }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case USER_INFO_REQUEST:
+      return { Loading: true };
+    case USER_INFO_SUCCESS:
+      return { Loading: false, user: payload };
+    case USER_INFO_FAIL:
+      return { Loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const userUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case USER_EDIT_REQUEST: {
+      return { Loading: true };
+    }
+    case USER_EDIT_SUCCESS: {
+      return {
+        Loading: false,
+        userInfo: payload,
+        success: true,
+      };
+    }
+    case USER_EDIT_RESET:
+      return {};
+    case USER_EDIT_FAIL: {
+      return {
+        Loading: false,
+        error: payload,
+      };
+    }
     default:
       return state;
   }

@@ -16,4 +16,16 @@ const getBookById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getBooks, getBookById };
+const deleteBook = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const book = await Book.findById(id);
+  if (book) {
+    await book.remove();
+    res.json({ message: 'book removed ' });
+  } else {
+    res.status(404);
+    throw new Error('book not found');
+  }
+});
+
+export { getBooks, getBookById, deleteBook };

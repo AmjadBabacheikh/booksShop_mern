@@ -13,7 +13,7 @@ const PaymentScreen = ({ history }) => {
     if (Object.entries(shippingAddress).length === 0) {
       history.push('/shipping');
     }
-  }, [history, shippingAddress, Object]);
+  }, [history, shippingAddress]);
   const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
   const submitHandler = (e) => {
