@@ -28,4 +28,60 @@ const deleteBook = asyncHandler(async (req, res) => {
   }
 });
 
-export { getBooks, getBookById, deleteBook };
+const updateBookById = asyncHandler(async (req, res) => {
+  const book = await Book.findById(req.params.id);
+  if (book) {
+    book.title = req.body.title || book.title;
+    book.description = req.body.description || book.description;
+    book.image = req.body.image || book.image;
+    book.author = req.body.author || book.author;
+    book.category = req.body.category || book.category;
+    book.language = req.body.language || book.language;
+    book.price = req.body.price || book.price;
+    book.countInStock = req.body.countInStock || book.countInStock;
+    book.year = req.body.year || book.year;
+    const updatedBook = await book.save();
+    res.json(updatedBook);
+  } else {
+    res.status(404);
+    throw new Error('book not founded');
+  }
+});
+
+const createBook = asyncHandler(async (req, res) => {
+  const {
+    title,
+    author,
+    language,
+    year,
+    countInStock,
+    category,
+    image,
+    price,
+    description,
+    rating,
+  } = req.body;
+  const book = new Book({
+    title,
+    author,
+    language,
+    year,
+    countInStock,
+    category,
+    image,
+    price,
+    description,
+    rating,
+    user: req.user._id,
+  });
+  const createdBook = await book.save();
+  if (createdBook) {
+    res.status(201);
+    res.json(createdBook);
+  } else {
+    res.status(400);
+    throw new Error('wrong book data');
+  }
+});
+
+export { getBooks, getBookById, deleteBook, updateBookById, createBook };

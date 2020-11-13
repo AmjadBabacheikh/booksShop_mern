@@ -8,6 +8,14 @@ import {
   BOOK_DELETE_REQUEST,
   BOOK_DELETE_SUCCESS,
   BOOK_DELETE_FAIL,
+  BOOK_UPDATE_REQUEST,
+  BOOK_UPDATE_SUCCESS,
+  BOOK_UPDATE_FAIL,
+  BOOK_UPDATE_RESET,
+  BOOK_CREATE_REQUEST,
+  BOOK_CREATE_SUCCESS,
+  BOOK_CREATE_FAIL,
+  BOOK_DETAIL_RESET,
 } from '../constants/bookConstants';
 
 export const listBookReducer = (state = { books: [] }, action) => {
@@ -39,6 +47,9 @@ export const bookDetailReducer = (state = { book: {} }, action) => {
     case BOOK_DETAIL_SUCCESS: {
       return { Loading: false, book: payload };
     }
+    case BOOK_DETAIL_RESET: {
+      return {};
+    }
     case BOOK_DETAIL_FAIL: {
       return {
         Loading: false,
@@ -59,6 +70,56 @@ export const bookDeleteReducer = (state = {}, action) => {
       return { Loading: false, successDelete: true };
     case BOOK_DELETE_FAIL:
       return { Loading: false, errorDelete: payload };
+    default:
+      return state;
+  }
+};
+
+export const bookUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case BOOK_UPDATE_REQUEST: {
+      return { Loading: true };
+    }
+    case BOOK_UPDATE_SUCCESS: {
+      return {
+        Loading: false,
+        book: payload,
+        success: true,
+      };
+    }
+    case BOOK_UPDATE_RESET:
+      return {};
+    case BOOK_UPDATE_FAIL: {
+      return {
+        Loading: false,
+        error: payload,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export const bookCreateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case BOOK_CREATE_REQUEST: {
+      return { Loading: true };
+    }
+    case BOOK_CREATE_SUCCESS: {
+      return {
+        Loading: false,
+        book: payload,
+        success: true,
+      };
+    }
+    case BOOK_CREATE_FAIL: {
+      return {
+        Loading: false,
+        error: payload,
+      };
+    }
     default:
       return state;
   }

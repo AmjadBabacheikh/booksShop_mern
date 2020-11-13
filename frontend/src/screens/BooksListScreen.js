@@ -30,19 +30,35 @@ const BooksListScreen = ({ history }) => {
   };
   return (
     <>
-      <h2 className='my-2'>Books</h2>
+      <Row>
+        <Col>
+          <h2 className='my-2'>Books</h2>
+        </Col>
+        <Col>
+          <Button
+            className='my-2'
+            onClick={() => {
+              history.push('/admin/book/create');
+            }}
+            style={{ float: 'right' }}
+          >
+            Create book
+          </Button>
+        </Col>
+      </Row>
       {Loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Table striped bordered hover className='md' responsive>
+        <Table striped bordered hover className='sm' responsive>
           <thead>
             <tr>
               <th>ID</th>
               <th>Title</th>
               <th>Price</th>
               <th>Author</th>
+              <th>Category</th>
               <th></th>
             </tr>
           </thead>
@@ -53,6 +69,7 @@ const BooksListScreen = ({ history }) => {
                 <td>{book.title}</td>
                 <td>{book.price}€</td>
                 <td>{book.author}</td>
+                <td>{book.category}</td>
                 <td>
                   <LinkContainer to={`/admin/book/${book._id}/edit`}>
                     <Button variant='light' className='btn-sm'>

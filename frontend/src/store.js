@@ -5,6 +5,8 @@ import {
   listBookReducer,
   bookDetailReducer,
   bookDeleteReducer,
+  bookUpdateReducer,
+  bookCreateReducer,
 } from './reducers/bookReducers';
 import {
   loginReducer,
@@ -22,6 +24,8 @@ import {
   orderDetailReducer,
   orderPayReducer,
   ordersMineReducer,
+  ordersListReducer,
+  orderDeliverReducer,
 } from './reducers/orderReducers';
 
 const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
@@ -55,6 +59,10 @@ const reducer = combineReducers({
   userInformations: userInformationsReducer,
   userUpdate: userUpdateReducer,
   bookDelete: bookDeleteReducer,
+  bookUpdate: bookUpdateReducer,
+  bookCreate: bookCreateReducer,
+  ordersList: ordersListReducer,
+  orderDeliver: orderDeliverReducer,
 });
 const initialState = {
   userLogin: {
