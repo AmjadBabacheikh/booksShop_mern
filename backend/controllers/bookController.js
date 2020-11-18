@@ -3,7 +3,7 @@ import Book from '../models/bookModel.js';
 import asyncHandler from 'express-async-handler';
 
 const getBooks = asyncHandler(async (req, res) => {
-  const bookPerPage = 2;
+  const bookPerPage = 10;
   const page = Number(req.query.pageNumber) || 1;
   const key = req.query.key
     ? {
