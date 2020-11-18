@@ -17,7 +17,7 @@ router.post('/', protect, isAdmin, createBook);
 router.post('/:id/reviews', protect, updateBookToReview);
 router
   .route('/:id')
-  .get('/:id', getBookById)
+  .get(getBookById)
   .delete(protect, isAdmin, deleteBook)
   .put(protect, isAdmin, updateBookById);
 
