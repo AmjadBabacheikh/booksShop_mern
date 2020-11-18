@@ -116,6 +116,9 @@ export const userUpdateProfileReducer = (state = {}, action) => {
         success: true,
       };
     }
+    case USER_UPDATE_PROFILE_RESET: {
+      return {};
+    }
     case USER_UPDATE_PROFILE_FAIL: {
       return {
         Loading: false,

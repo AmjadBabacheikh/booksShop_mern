@@ -4,6 +4,7 @@ import { Button, Form, Row, Col, Table } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserProfile, updateUserProfile } from '../actions/userActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 import { getMyOrders } from '../actions/orderActions';
 import { LinkContainer } from 'react-router-bootstrap';
 
