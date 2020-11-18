@@ -25,7 +25,7 @@ const getBookById = asyncHandler(async (req, res) => {
   if (!book) {
     res.status(404).json({ message: 'book not found' });
   } else {
-    res.json({ book, reviews: book.reviews });
+    res.json(book);
   }
 });
 

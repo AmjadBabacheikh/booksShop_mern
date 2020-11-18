@@ -13,11 +13,11 @@ import { isAdmin, protect } from '../middleware/authMiddleware.js';
 
 router.get('/', getBooks);
 router.get('/top', getTopBooks);
+router.get('/:id', getBookById);
 router.post('/', protect, isAdmin, createBook);
 router.post('/:id/reviews', protect, updateBookToReview);
 router
   .route('/:id')
-  .get(getBookById)
   .delete(protect, isAdmin, deleteBook)
   .put(protect, isAdmin, updateBookById);
 
