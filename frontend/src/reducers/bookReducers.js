@@ -80,7 +80,7 @@ export const bookDetailReducer = (state = { book: {} }, action) => {
       return { Loading: true };
     }
     case BOOK_DETAIL_SUCCESS: {
-      return { Loading: false, book: payload };
+      return { Loading: false, book: payload.book, reviews: payload.reviews };
     }
     case BOOK_DETAIL_RESET: {
       return {};
