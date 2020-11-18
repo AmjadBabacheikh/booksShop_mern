@@ -5,3 +5,34 @@ main {
 h2 {
   color: #121212;
 }
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+.carousel-caption {
+  position: absolute;
+  top: 0;
+}
+
+.carousel-caption h2 {
+  color: #fff;
+  font-size: 22px;
+}
+
+.carousel img {
+  height: 400px;
+  padding: 40px;
+  margin: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel a {
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    font-size: 3vw;
+  }
+}

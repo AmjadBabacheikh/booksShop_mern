@@ -17,7 +17,7 @@ const ShippingScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, postalCode, city, country }));
-    history.push('/payment');
+    history.push('/placeorder');
   };
   return (
     <FormContainer>

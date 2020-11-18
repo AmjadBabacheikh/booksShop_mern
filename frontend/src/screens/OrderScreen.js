@@ -29,7 +29,7 @@ const OrderScreen = ({ match }) => {
       };
       document.body.appendChild(script);
     };
-    if (!order || successPay) {
+    if (!order || successPay || orderId !== order._id) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetail(orderId));
     } else if (!order.isPaid) {

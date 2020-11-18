@@ -1,28 +1,32 @@
 import React from 'react';
-import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, Container, NavDropdown, Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
+import Search from './Search';
+import logo from '../logo.svg';
 
 const Header = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { Loading, error, userInfo } = userLogin;
 
-  const logoutHandler = () => {
-    dispatch(logout());
-    Redirect('/');
-  };
   return (
     <header>
       <Navbar bg='primary' variant='dark' expand='lg'>
         <Container>
+          <LinkContainer to='/' style={{ cursor: 'pointer' }}>
+            <Image alt='booksShop logo' src={logo} />
+          </LinkContainer>
           <LinkContainer to='/'>
-            <Navbar.Brand>BooksShop</Navbar.Brand>
+            <Navbar.Brand style={{ fontFamily: 'Raleway' }}>
+              BookShop
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <Route render={({ history }) => <Search history={history} />} />
             <Nav className='ml-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>
@@ -47,9 +51,19 @@ const Header = () => {
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    logout
-                  </NavDropdown.Item>
+                  <Route
+                    render={({ history }) => (
+                      <NavDropdown.Item
+                        history={history}
+                        onClick={() => {
+                          dispatch(logout());
+                          history.push('/');
+                        }}
+                      >
+                        logout
+                      </NavDropdown.Item>
+                    )}
+                  />
                 </NavDropdown>
               ) : (
                 <LinkContainer to='/login'>

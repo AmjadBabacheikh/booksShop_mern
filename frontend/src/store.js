@@ -7,6 +7,8 @@ import {
   bookDeleteReducer,
   bookUpdateReducer,
   bookCreateReducer,
+  reviewCreateReducer,
+  topRatedBookReducer,
 } from './reducers/bookReducers';
 import {
   loginReducer,
@@ -63,6 +65,8 @@ const reducer = combineReducers({
   bookCreate: bookCreateReducer,
   ordersList: ordersListReducer,
   orderDeliver: orderDeliverReducer,
+  reviewCreate: reviewCreateReducer,
+  topRatedBook: topRatedBookReducer,
 });
 const initialState = {
   userLogin: {

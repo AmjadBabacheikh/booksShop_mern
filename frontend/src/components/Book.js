@@ -8,7 +8,7 @@ const Book = ({ book }) => {
   return (
     <Card
       style={{ width: '17rem', height: '29.4rem' }}
-      className='my-2 px-1 rounded'
+      className='my-2 px-1 rounded mx-sm-auto'
     >
       <Link to={`/books/${book._id}`}>
         <Card.Img

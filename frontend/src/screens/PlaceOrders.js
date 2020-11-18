@@ -7,9 +7,10 @@ import CheckoutOperations from '../components/CheckoutOperations';
 import Message from '../components/Message';
 
 const PlaceOrders = ({ history }) => {
+  const [paymentMethod, setPaymentMethod] = useState('Paypal');
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { shippingAddress, paymentMethod, cartItems } = cart;
+  const { shippingAddress, cartItems } = cart;
   const totalPrice = (qty, price) => {
     return (qty * price).toFixed(2);
   };

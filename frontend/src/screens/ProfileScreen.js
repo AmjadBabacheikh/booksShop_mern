@@ -45,6 +45,8 @@ const RegisterScreen = ({ history }) => {
       setMessage('passwords does not match');
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      setPassword('');
+      setConfirmPassword('');
     }
   };
 
