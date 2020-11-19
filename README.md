@@ -5,8 +5,8 @@ ecommerce mern application with node react redux
 Create a .env file in then root and add the following
 NODE_ENV = development
 PORT = 5000
-MONGO_URI = your mongodb uri
-JWT_SECRET = 'abc123'
+DATABASE = your mongodb uri
+JWT_SECRET = 'gfhgfhgfhgfhgfh'
 PAYPAL_CLIENT_ID = your paypal client id
 
 # Run
